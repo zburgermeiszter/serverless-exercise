@@ -1,0 +1,13 @@
+{
+  "name": "serverless-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "serverless-s3-remover": "^0.6.0",
+    "serverless-s3-sync": "^1.10.2"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
