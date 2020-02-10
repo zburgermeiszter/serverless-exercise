@@ -4,10 +4,23 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
+    "@aws/dynamodb-auto-marshaller": "^0.7.1",
+    "aws-sdk": "^2.614.0",
+    "serverless-plugin-typescript": "^1.1.9",
     "serverless-s3-remover": "^0.6.0",
-    "serverless-s3-sync": "^1.10.2"
+    "serverless-s3-sync": "^1.10.2",
+    "ytdl-core": "^1.0.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.40",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node": "^13.7.0",
+    "source-map-support": "^0.5.16",
+    "typescript": "^3.7.5"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
   "author": "",
   "license": "ISC"
 }
