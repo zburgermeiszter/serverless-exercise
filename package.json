@@ -1,10 +1,12 @@
 {
   "name": "serverless-exercise",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/handler.js",
   "scripts": {
-    "predeploy": "tsc",
+    "compile": "tsc",
+    "postinstall": "npm run compile",
+    "predeploy": "npm run compile",
     "deploy": "sls deploy",
     "remove": "sls remove"
   },
