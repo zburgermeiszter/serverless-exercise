@@ -1,39 +1,24 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: serverless-exercise2
 # app and org for use with dashboard.serverless.com
 app: serverless-exercise
 org: zburgermeiszter
 
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
-# frameworkVersion: "=X.X.X"
-
 custom:
   tableName: results
   uploadsBucketName: ${self:service}-uploads
+  lambdaName: ${self:service}-${self:provider.stage}-processVideoIDs
   s3Sync:
-    - bucketNameKey: UploadsBucketNameOutputKey
+    - bucketName: ${self:custom.uploadsBucketName}
       localDir: uploads
   videoIDsFile: videos.txt
+  remover:
+    buckets:
+      - ${self:custom.uploadsBucketName}
 
 provider:
   name: aws
   runtime: nodejs12.x
 
-  # you can overwrite defaults here
-  #  stage: dev
   region: eu-west-2
 
   environment:
@@ -59,14 +44,20 @@ provider:
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:BatchWriteItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
         - 'Fn::GetAtt': [ResultsTable, Arn]
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: '*'
 
 functions:
   processVideoIDs:
-    handler: handler.processVideoIDs
+    name: ${self:custom.lambdaName}
+    handler: dist/handler.processVideoIDs
     events:
       - http:
           path: processVideoIDs
@@ -105,8 +96,9 @@ resources:
       Value: !Ref UploadsBucket
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-s3-sync
+  - ./dist/plugins/invoker-plugin
+  - serverless-s3-remover
 
 package:
   exclude:

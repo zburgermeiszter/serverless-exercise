@@ -1,5 +1,5 @@
 import { Marshaller } from '@aws/dynamodb-auto-marshaller';
-import { APIGatewayEvent } from 'aws-lambda';
+import { APIGatewayEvent, Context, ProxyResult } from 'aws-lambda';
 import { S3, DynamoDB } from 'aws-sdk';
 import ytdl from 'ytdl-core';
 
@@ -61,8 +61,9 @@ export const writeVideoInfosToDynamoDB = ({
 };
 
 export const requestWrapper = (wrapped: () => Promise<{}>) => async (
-  event: APIGatewayEvent
-) => {
+  event: APIGatewayEvent,
+  context: Context
+): Promise<ProxyResult> => {
   try {
     return {
       statusCode: 200,
