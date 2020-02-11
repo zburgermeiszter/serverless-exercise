@@ -1,0 +1,31 @@
+{
+  "name": "serverless-exercise",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/handler.js",
+  "scripts": {
+    "predeploy": "tsc",
+    "deploy": "sls deploy",
+    "remove": "sls remove"
+  },
+  "dependencies": {
+    "@aws/dynamodb-auto-marshaller": "^0.7.1",
+    "aws-sdk": "^2.614.0",
+    "serverless-s3-remover": "^0.6.0",
+    "serverless-s3-sync": "^1.10.2",
+    "source-map-support": "^0.5.16",
+    "ytdl-core": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.40",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/node": "^13.7.0",
+    "@types/serverless": "^1.18.4",
+    "typescript": "^3.7.5"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "author": "",
+  "license": "ISC"
+}
