@@ -14,6 +14,8 @@ Configure `service`, `app` and `org` in `serverless.yml`.
 
 Install `serverless` using `npm install -g serverless`.
 
+Install the project dependencies using `npm install`.
+
 ## Deployment
 
 To deploy the stack to AWS run `npm run deploy`
